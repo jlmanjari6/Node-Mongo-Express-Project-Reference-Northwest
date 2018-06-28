@@ -1,0 +1,80 @@
+<div class="container-fluid">
+  <div class=row>
+    <div class="col col-md-12">
+      <a href="estimate/create" class="btn btn-primary new">
+        Create a new estimate
+      </a>
+      <h2>Recent estimates</h2>
+      <p>There are
+        <%= estimates.query.length %> estimates.
+          <br/>
+      </p>
+      <% for (var i = estimates.query.length-1; i >= 0; i--) {   estimate = estimates.query[i];   %>
+        <div class="panel panel-default">
+          <div class="panel-heading"></div>
+          <div class="text-muted pull-right"></div>
+          <div class="panel-body">
+            ID:
+            <%=  estimate._id %>
+              <br> Name:
+              <%=estimate.name%>
+                <br/> Location:
+                <%=estimate.location%>
+                  <br/> SqFt:
+                  <%=estimate.squareFeet%>
+                    <br/>
+                    <br/>
+                    <% for (let j = 0; j < estimate.materials.length; j++) { material = estimate.materials[j]; %>
+                      <div>
+                        <%=material.product%>. $
+                          <%=material.unitcost%>/unit,
+                            <%=material.coverageSquareFeetPerUnit%> sqft/unit
+                      </div>
+
+                      <% } %>
+                        <br/> Num Days:
+                        <%=estimate.numberOfDays%>
+                          <br/> Hrs/Day:
+                          <%=estimate.hoursWorkedPerDay%>
+                            <br/> Labor $/Hr:
+                            <%=estimate.laborDollarsPerHour%>
+                              <br/> Num Rooms:
+                              <%=estimate.numberHotelRooms%>
+                                <br/> Num Nights:
+                                <%=estimate.numberHotelNights%>
+                                  <br/> Hotel $/night:
+                                  <%=estimate.hotelDollarsPerNight%>
+                                    <br/> Food $/day:
+                                    <%=estimate.foodDollarsPerDay%>
+                                      <br/> Num Vehicles:
+                                      <%=estimate.numberOfVehicles%>
+                                        <br/> Miles/vehicle:
+                                        <%=estimate.milesPerVehicle%>
+                                          <br/> $/mile:
+                                          <%=estimate.dollarsPerMile%>
+
+                                            <br/>
+                                            <br/>
+                                            <% for (let k = 0; k < estimate.miscellaneous.length; k++) { entry = estimate.miscellaneous[k]; %>
+                                              <div>
+                                                <%=entry.misc%> = $
+                                                  <%=entry.cost%>
+                                              </div>
+
+                                              <% } %>
+                                                <br/> Multiplier:
+                                                <%=estimate.multiplier%>
+                                                  <br/>
+
+                                                  <br/>
+
+                                                  <a href="/estimate/delete/<%= estimate._id  %>" class="btn btn-danger"> Delete </a>
+                                                  <a href="/estimate/details/<%= estimate._id %>" class="btn btn-info"> Details </a>
+                                                  <a href="/estimate/edit/<%= estimate._id %>" class="btn btn-warning"> Edit </a>
+          </div>
+        </div>
+        <% } %>
+
+    </div>
+  </div>
+</div>

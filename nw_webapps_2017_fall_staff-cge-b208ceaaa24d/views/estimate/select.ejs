@@ -1,0 +1,33 @@
+<div class="container-fluid">
+  <div class=row>
+    <div class="col col-md-12">
+      <a href="../estimate/create" class="btn btn-danger new">
+        Cancel and return to create
+      </a>
+      <h2>Recent estimates</h2>
+      <p>There are
+        <%= estimates.query.length %> estimates.
+          <br/>
+      </p>
+      <% 
+for (var i =  estimates.query.length; i >0 ; i--) { 
+  estimate = estimates.query[i-1]; 
+  %>
+        <div class="panel panel-default">
+          <div class="panel-heading"></div>
+          <div class="text-muted pull-right"></div>
+          <div class="panel-body">
+            <h3>
+              <%=  estimate._id %>:
+                <%=estimate.name%> @
+                  <%=estimate.location%>
+                    (<%=estimate.squareFeet%> sqft)
+                      <br/>
+            </h3>
+            <a href="/estimate/copyfrom/<%= estimate._id  %>" class="btn btn-success"> Select </a>
+          </div>
+        </div>
+        <% } %>
+    </div>
+  </div>
+</div>

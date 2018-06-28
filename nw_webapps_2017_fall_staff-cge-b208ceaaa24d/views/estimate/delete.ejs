@@ -1,0 +1,64 @@
+<br/>
+<br/>
+<h2>Confirm deletion of estimate</h2>
+<br/>
+<br/> ID:
+<%=  estimate._id %>
+  <br> Name:
+  <%=estimate.name%>
+    <br/> Location:
+    <%=estimate.location%>
+      <br/> SqFt:
+      <%=estimate.squareFeet%>
+        <br/>
+        <br/>
+        <% for (let j = 0; j < estimate.materials.length; j++) { material = estimate.materials[j]; %>
+          <div>
+            <%=material.product%>. $
+              <%=material.unitcost%>/unit,
+                <%=material.coverageSquareFeetPerUnit%> sqft/unit
+          </div>
+          <% } %>
+            <br/> Num Days:
+            <%=estimate.numberOfDays%>
+              <br/> Hrs/Day:
+              <%=estimate.hoursWorkedPerDay%>
+                <br/> Labor $/Hr:
+                <%=estimate.laborDollarsPerHour%>
+                  <br/> Num Rooms:
+                  <%=estimate.numberHotelRooms%>
+                    <br/> Num Nights:
+                    <%=estimate.numberHotelNights%>
+                      <br/> Hotel $/night:
+                      <%=estimate.hotelDollarsPerNight%>
+                        <br/> Food $/day:
+                        <%=estimate.foodDollarsPerDay%>
+                          <br/> Num Vehicles:
+                          <%=estimate.numberOfVehicles%>
+                            <br/> Miles/vehicle:
+                            <%=estimate.milesPerVehicle%>
+                              <br/> $/mile:
+                              <%=estimate.dollarsPerMile%>
+
+                                <br/>
+                                <br/>
+                                <% for (let k = 0; k < estimate.miscellaneous.length; k++) { entry = estimate.miscellaneous[k]; %>
+                                  <div>
+                                    <%=entry.misc%> = $
+                                      <%=entry.cost%>
+                                  </div>
+
+                                  <% } %>
+                                    <br/> Multiplier:
+                                    <%=estimate.multiplier%>
+                                      <br/>
+                                      <br/>
+
+                                      <form method="get" action="/estimate">
+                                        <input type="submit" value="Return to list" class="btn btn-caution" />
+                                      </form>
+
+                                      <br/>
+                                      <form method="POST" action="/estimate/delete/<%= estimate._id %>">
+                                        <input type="submit" value="Delete this item" class="btn btn-danger pull-right" />
+                                      </form>
